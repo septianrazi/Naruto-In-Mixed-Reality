@@ -6,38 +6,51 @@ public class RasenganScale : MonoBehaviour
 {
 
     [SerializeField] private bool stableRasengan = false;
-    [SerializeField] private Vector3 stableRasenganScale = new Vector3(0.07f, 0.07f, 0.07f);
+    private bool prevStableRasengan = false;
+    [SerializeField] private Vector3 stableRasenganScale = new Vector3(0.06f, 0.06f, 0.06f);
 
-    [SerializeField] private Vector3 decrementBy = Vector3.one * 0.00005f;
-    [SerializeField] private Vector3 incrementBy = Vector3.one * 0.001f;
+    [SerializeField] private float decrementBy = 0.1f;
+    [SerializeField] private float incrementBy = 1.5f;
+
+    [SerializeField] AudioSource stableRasenganNoise;
 
     public bool incRasengan = false;
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (incRasengan){
             IncreaseRasenganSize();
         }
         else if (!stableRasengan)
         {
-            DecreaseRasenganSize(decrementBy);
+            DecreaseRasenganSize();
+            if (prevStableRasengan)
+            {
+                StartCoroutine(AudioEffects.AudioEffects.StartFade(stableRasenganNoise, 1, 0));
+            }
         }
+
+        if (stableRasengan){
+            stableRasenganNoise.volume = 1;
+
+
+        }
+
+        
+        prevStableRasengan = stableRasengan;
     }
 
-    void DecreaseRasenganSize(Vector3 decrement)
+    void DecreaseRasenganSize()
     {
-        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 3f * Time.deltaTime);
-
-
-        //if (currentScale.x <= 0.001)
-        //    transform.localScale = Vector3.zero;
+        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, decrementBy * Time.deltaTime);
     }
 
 
     void IncreaseRasenganSize()
     {
-        transform.localScale = Vector3.Lerp(transform.localScale, stableRasenganScale, 1.5f * Time.deltaTime);
+        transform.localScale = Vector3.Lerp(transform.localScale, stableRasenganScale, incrementBy * Time.deltaTime);
 
         if (transform.localScale.x >= stableRasenganScale.x)
         {
@@ -49,7 +62,6 @@ public class RasenganScale : MonoBehaviour
     public void ChangeToUnstableRasengan()
     {
         incRasengan = false;
-
         stableRasengan = false;
     }
 
