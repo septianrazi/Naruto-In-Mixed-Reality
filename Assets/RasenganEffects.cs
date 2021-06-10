@@ -12,6 +12,11 @@ public class RasenganEffects : MonoBehaviour
 
     [SerializeField] RasenganScale rasenganScaleComp;
 
+    [SerializeField] float incPlayRate = 2f;
+    [SerializeField] float decPlayRate = 3f;
+
+    [SerializeField] RasenShurikenBehaviour RasenShurikenComp;
+
     private IEnumerator startSoundFadeCoroutine;
     private IEnumerator soundFadeCoroutine;
 
@@ -29,7 +34,7 @@ public class RasenganEffects : MonoBehaviour
 
         rasenganScaleComp.ChangeToIncRasengan();
 
-        vfx.playRate = 2f;
+        vfx.playRate = incPlayRate;
         vfx.Play();
 
 
@@ -49,11 +54,40 @@ public class RasenganEffects : MonoBehaviour
 
         vfx.Stop();
 
-        vfx.playRate = 3f;
+        vfx.playRate = decPlayRate;
 
         rasenganScaleComp.ChangeToUnstableRasengan();
 
         StartCoroutine(startSoundFadeCoroutine);
+        //StartCoroutine(AudioEffects.AudioEffects.StartFade(contSound, 2f, 0f));
+    }
+
+
+    [ContextMenu("Disable Rasengan")]
+    public void EnableRasenShuriken()
+    {
+        Debug.Log("ADDING RASENSHURIKEN");
+
+        EnableRasengan();
+        RasenShurikenComp.EnableRasenShuriken();
+
+
+
+        //StartCoroutine(startSoundFadeCoroutine);
+        //StartCoroutine(AudioEffects.AudioEffects.StartFade(contSound, 2f, 0f));
+    }
+
+    [ContextMenu("Disable Rasengan")]
+    public void DisableRasenShuriken()
+    {
+
+
+        RasenShurikenComp.DisableRasenShuriken();
+        Debug.Log("KILLING RASENSHURIKEN");
+
+        DisableRasengan();
+
+        //StartCoroutine(startSoundFadeCoroutine);
         //StartCoroutine(AudioEffects.AudioEffects.StartFade(contSound, 2f, 0f));
     }
 
