@@ -63,7 +63,7 @@ public class RasenganEffects : MonoBehaviour
     }
 
 
-    [ContextMenu("Disable Rasengan")]
+    [ContextMenu("Enable RasenShuriken")]
     public void EnableRasenShuriken()
     {
         Debug.Log("ADDING RASENSHURIKEN");
@@ -77,7 +77,7 @@ public class RasenganEffects : MonoBehaviour
         //StartCoroutine(AudioEffects.AudioEffects.StartFade(contSound, 2f, 0f));
     }
 
-    [ContextMenu("Disable Rasengan")]
+    [ContextMenu("Disable RasenShuriken")]
     public void DisableRasenShuriken()
     {
 

@@ -14,6 +14,8 @@ public class RasenShurikenBehaviour : MonoBehaviour
 
     [SerializeField] private Renderer[] bladeRenderers;
 
+    [SerializeField] private float materialAlpha = 0.5f;
+
     
 
     // Update is called once per frame
@@ -95,12 +97,12 @@ public class RasenShurikenBehaviour : MonoBehaviour
         Color matColor = rendToFade.material.color;
         float alphaValue = rendToFade.material.color.a;
 
-        while (rendToFade.material.color.a < 1f)
+        while (rendToFade.material.color.a < materialAlpha)
         {
             alphaValue += Time.deltaTime / fadeSpeed;
             rendToFade.material.color = new Color(matColor.r, matColor.g, matColor.b, alphaValue);
             yield return null;
         }
-        rendToFade.material.color = new Color(matColor.r, matColor.g, matColor.b, 1f);
+        rendToFade.material.color = new Color(matColor.r, matColor.g, matColor.b, materialAlpha);
     }
 }

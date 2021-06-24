@@ -132,7 +132,14 @@ To use the custom hand gestures in your own projects, its as simple as using the
 <!-- USAGE EXAMPLES -->
 ## Examples
 
+- Rasengan + RasenShuriken:
+
 ![Naruto In Mixed Reality RasenShuriken Example](Screenshots/ExampleRasenShuriken.gif)
+
+- Chidori:
+
+![Naruto In Mixed Reality Chidori Example](Screenshots/ExampleChidori.gif)
+
 
 <!-- ROADMAP -->
 <!-- ## Roadmap
