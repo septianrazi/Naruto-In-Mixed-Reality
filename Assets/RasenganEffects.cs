@@ -50,7 +50,7 @@ public class RasenganEffects : MonoBehaviour
     [ContextMenu("Disable Rasengan")]
     public void DisableRasengan()
     {
-        Debug.Log("STopping RASENGAN");
+        Debug.Log("Stopping RASENGAN");
 
         vfx.Stop();
 
@@ -81,11 +81,11 @@ public class RasenganEffects : MonoBehaviour
     public void DisableRasenShuriken()
     {
 
-
-        RasenShurikenComp.DisableRasenShuriken();
         Debug.Log("KILLING RASENSHURIKEN");
 
         DisableRasengan();
+        RasenShurikenComp.DisableRasenShuriken();
+
 
         //StartCoroutine(startSoundFadeCoroutine);
         //StartCoroutine(AudioEffects.AudioEffects.StartFade(contSound, 2f, 0f));

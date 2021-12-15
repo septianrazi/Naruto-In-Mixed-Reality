@@ -43,8 +43,6 @@ public class RasenShurikenBehaviour : MonoBehaviour
     public void EnableRasenShuriken()
     {
         Debug.Log("ENABLING RASENSHURIKEN");
-        enabling = true;
-        disabling = false;
 
         foreach (Renderer rend in bladeRenderers)
         {
@@ -59,17 +57,28 @@ public class RasenShurikenBehaviour : MonoBehaviour
 
     public void DisableRasenShuriken()
     {
-
         Debug.Log("DISABLING RASENSHURIKEN");
-
-        enabling = false;
-        disabling = true;
 
         foreach (Renderer rend in bladeRenderers)
         {
             StartCoroutine(FadeOutMaterialAndDisable(fadeInSpeed, rend));
 
         }
+    }
+
+    IEnumerator FadeInMaterial(float fadeSpeed, Renderer rendToFade)
+    {
+        Debug.Log("FADING IN");
+        Color matColor = rendToFade.material.color;
+        float alphaValue = rendToFade.material.color.a;
+
+        while (rendToFade.material.color.a < materialAlpha)
+        {
+            alphaValue += Time.deltaTime / fadeSpeed;
+            rendToFade.material.color = new Color(matColor.r, matColor.g, matColor.b, alphaValue);
+            yield return null;
+        }
+        rendToFade.material.color = new Color(matColor.r, matColor.g, matColor.b, materialAlpha);
     }
 
     IEnumerator FadeOutMaterialAndDisable(float fadeSpeed, Renderer rendToFade)
@@ -88,21 +97,5 @@ public class RasenShurikenBehaviour : MonoBehaviour
         rendToFade.material.color = new Color(matColor.r, matColor.g, matColor.b, 0f);
 
         rendToFade.gameObject.SetActive(false);
-    }
-
-    IEnumerator FadeInMaterial(float fadeSpeed, Renderer rendToFade)
-    {
-        Debug.Log("FADING IN");
-
-        Color matColor = rendToFade.material.color;
-        float alphaValue = rendToFade.material.color.a;
-
-        while (rendToFade.material.color.a < materialAlpha)
-        {
-            alphaValue += Time.deltaTime / fadeSpeed;
-            rendToFade.material.color = new Color(matColor.r, matColor.g, matColor.b, alphaValue);
-            yield return null;
-        }
-        rendToFade.material.color = new Color(matColor.r, matColor.g, matColor.b, materialAlpha);
     }
 }
